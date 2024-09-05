@@ -1,8 +1,8 @@
 package pos_java_jdbc.pos_java_jdbc;
 
-import org.junit.jupiter.api.Test;
+import java.util.List;
 
-import conexaojdbc.SingleConnection;
+import org.junit.jupiter.api.Test;
 import dao.UserPosDAO;
 import model.Userposjava;
 
@@ -14,11 +14,65 @@ public class TesteBancoJdbc {
 			UserPosDAO userPosDAO = new UserPosDAO();
 			Userposjava userposjava = new Userposjava();
 			
-			userposjava.setId(6L);
 			userposjava.setNome("Robson");
 			userposjava.setEmail("robson.francisco@gmail.com");
 			
 			userPosDAO.salvar(userposjava);
+		}
+		
+		@Test
+		public void initListar() {
+			UserPosDAO dao = new UserPosDAO();
+			try {
+				List<Userposjava> list = dao.listar();
+				
+				for (Userposjava userposjava : list) {
+					System.out.println(userposjava);
+					System.out.println("----------------------------------------");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		@Test
+		public void initBuscar() {
+			UserPosDAO dao = new UserPosDAO();
+			try {
+				Userposjava userposjava = dao.buscar(6L);
+				System.out.println(userposjava);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		@Test
+		public void InitAtualizar() {
+			try {
+				UserPosDAO dao = new UserPosDAO();
+				
+				Userposjava objetoBanco = dao.buscar(5L);
+				
+				objetoBanco.setNome("Nome com metodo atualizar");
+				
+				dao.atualizar(objetoBanco);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		@Test
+		public void initDeletar() {
+			
+			try {
+				UserPosDAO dao = new UserPosDAO();
+				dao.deletar(5L);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	
 }
