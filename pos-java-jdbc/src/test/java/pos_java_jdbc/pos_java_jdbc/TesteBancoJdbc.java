@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import dao.UserPosDAO;
+import model.Telefone;
 import model.Userposjava;
 
 public class TesteBancoJdbc {
@@ -75,4 +76,17 @@ public class TesteBancoJdbc {
 			}
 		}
 	
+		
+		@Test
+		public void testeInsertTelefone() {
+			
+			Telefone telefone = new Telefone();
+			telefone.setNumero("(22) 3312-4896 ");
+			telefone.setTipo("Residencial");
+			telefone.setUsuario(2L);
+			
+			UserPosDAO dao = new UserPosDAO();
+			dao.salvarTelefone(telefone);
+			
+		}
 }
